@@ -27,10 +27,17 @@
 }
 .cal-num{
     background-color: #fff;
+    font-weight: 700;
+}
+.btn-font{
+    font-weight: 700;
 }
 .btn-eql{
     background-color: #5DADE2;
 }
 .cal-table{
     margin: 8px;
+}
+.btn-fun{
+    width: 134px;
 }
