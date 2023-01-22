@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row cal-row">
             <div class="col-md-12">
-                <form action="#" name="calcultor" class="main">
+                <form action="#" name="calsi" class="main">
                     <input type="text" class="display form-control" name="display" id="display"/><br>
                     <table class="cal-table">
                         <tbody>
@@ -35,8 +35,8 @@
                                 <td><input type="button" class="btn btn-primary" value="2nd"/></td>
                                 <td><input type="button" class="btn btn-primary" value="π"/></td>
                                 <td><input type="button" class="btn btn-primary" value="e"/></td>
-                                <td><input type="button" class="btn btn-primary" value="C"/></td>
-                                <td><input type="button" class="btn btn-primary" value="⌫"/></td>
+                                <td><input type="button" class="btn btn-primary" value="C" id="clear"/></td>
+                                <td><input type="button" class="btn btn-primary" value="⌫" onclick="backSpace()"/></td>
                             </tr>
                             <tr>
                                 <td><input type="button" class="btn btn-primary" value="x²"/></td>
@@ -50,35 +50,35 @@
                                 <td><input type="button" class="btn btn-primary" value="("/></td>
                                 <td><input type="button" class="btn btn-primary" value=")"/></td>
                                 <td><input type="button" class="btn btn-primary" value="n!"/></td>
-                                <td><input type="button" class="btn btn-primary" value="÷"/></td>
+                                <td><input type="button" class="btn btn-primary" value="÷" onclick="devide()"/></td>
                             </tr>
                             <tr>
                                 <td><input type="button" class="btn btn-primary" value="x^y"/></td>
-                                <td><input type="button" class="btn btn-primary cal-num" value="7"/></td>
-                                <td><input type="button" class="btn btn-primary cal-num" value="8"/></td>
-                                <td><input type="button" class="btn btn-primary cal-num" value="9"/></td>
-                                <td><input type="button" class="btn btn-primary" value="*"/></td>
+                                <td><input type="button" class="btn btn-primary cal-num" value="7" onclick="seven()"/></td>
+                                <td><input type="button" class="btn btn-primary cal-num" value="8" onclick="eight()"/></td>
+                                <td><input type="button" class="btn btn-primary cal-num" value="9" onclick="nine()"/></td>
+                                <td><input type="button" class="btn btn-primary" value="*" onclick="mutiply()"/></td>
                             </tr>
                             <tr>
                                 <td><input type="button" class="btn btn-primary" value="10^x"/></td>
-                                <td><input type="button" class="btn btn-primary cal-num" value="4"/></td>
-                                <td><input type="button" class="btn btn-primary cal-num" value="5"/></td>
-                                <td><input type="button" class="btn btn-primary cal-num" value="6"/></td>
-                                <td><input type="button" class="btn btn-primary" value="-"/></td>
+                                <td><input type="button" class="btn btn-primary cal-num" value="4" onclick="four()"/></td>
+                                <td><input type="button" class="btn btn-primary cal-num" value="5" onclick="five()"/></td>
+                                <td><input type="button" class="btn btn-primary cal-num" value="6" onclick="six()"/></td>
+                                <td><input type="button" class="btn btn-primary" value="-" onclick="subtract()"/></td>
                             </tr>
                             <tr>
                                 <td><input type="button" class="btn btn-primary" value="log"/></td>
-                                <td><input type="button" class="btn btn-primary cal-num" value="1"/></td>
-                                <td><input type="button" class="btn btn-primary cal-num" value="2"/></td>
-                                <td><input type="button" class="btn btn-primary cal-num" value="3"/></td>
-                                <td><input type="button" class="btn btn-primary" value="+"/></td>
+                                <td><input type="button" class="btn btn-primary cal-num" value="1" onclick="one()"/></td>
+                                <td><input type="button" class="btn btn-primary cal-num" value="2" onclick="two()"/></td>
+                                <td><input type="button" class="btn btn-primary cal-num" value="3" onclick="three()"/></td>
+                                <td><input type="button" class="btn btn-primary" value="+" onclick="add()"/></td>
                             </tr>
                             <tr>
                                 <td><input type="button" class="btn btn-primary" value="In"/></td>
                                 <td><input type="button" class="btn btn-primary cal-num" value="+/-"/></td>
-                                <td><input type="button" class="btn btn-primary cal-num" value="0"/></td>
-                                <td><input type="button" class="btn btn-primary cal-num" value="."/></td>
-                                <td><input type="button" class="btn btn-primary btn-eql" value="="/><br></td>
+                                <td><input type="button" class="btn btn-primary cal-num" value="0" onclick="zero()"/></td>
+                                <td><input type="button" class="btn btn-primary cal-num" value="." onclick="point()"/></td>
+                                <td><input type="button" class="btn btn-primary btn-eql" value="=" onclick="equal()"/><br></td>
                             </tr>
                         </tbody>
                     </table>       
