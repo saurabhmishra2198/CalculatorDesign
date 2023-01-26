@@ -158,10 +158,70 @@ function factorial(){
     }
     screenValue.value = fact;
 }
-
-function xPowY(){
-    console.log(screenValue.value,screenValue.value+1);
-    
+//
+function trigonometry(num){
+    switch(num){
+        case 'sin':
+            if(screenValue.value == " ")
+            {
+                screenValue.value = 'sin()';
+            }
+            else{
+                let n = Math.sin(screenValue.value * Math.PI /180)
+                screenValue.value = n;
+            }
+            break;
+        case 'cos':
+            if(screenValue.value == " ")
+            {
+                screenValue.value = 'cos()';
+            }
+            else{
+                let n = Math.cos(screenValue.value * Math.PI /180)
+                screenValue.value = n;
+            }
+            break;
+        case 'tan':
+            if(screenValue.value == " ")
+            {
+                screenValue.value = 'tan()';
+            }
+            else{
+                let n = Math.tan(screenValue.value * Math.PI /180)
+                screenValue.value = n;
+            }
+            break;
+        case 'sec':
+            if(screenValue.value == " ")
+            {
+                screenValue.value = 'sec()';
+            }
+            else{
+                let n = Math.acos(screenValue.value * Math.PI /180)
+                screenValue.value = n;
+            }
+            break;
+        case 'csc':
+            if(screenValue.value == " ")
+            {
+                screenValue.value = 'csc()';
+            }
+            else{
+                let n = Math.cosh(screenValue.value * Math.PI /180)
+                screenValue.value = n;
+            }
+            break;
+        case 'cot':
+            if(screenValue.value == " ")
+            {
+                screenValue.value = 'cot()';
+            }
+            else{
+                let n = Math.atanh(screenValue.value * Math.PI /180)
+                screenValue.value = n;
+            }
+            break;
+    }
 }
 
 
