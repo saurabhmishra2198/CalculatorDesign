@@ -1,10 +1,36 @@
+//screen value
 var screenValue = document.calsi.display;
+//empty array
+let memoryArray = [];
+// define sign variable
+var sign;
+//2nd btn value
+let btnVal = 0;
 //display numbers & operator
-function displayNum(num)
-{
-    switch(num){
+let signcounter = 0;
+let pointcounter = 0;
+let bracatcounter = 0;
+let lcount = 0;
+let bodmasCounter = 0;
+let plusmincount = 0;
+let equalCounter = 0;
+let simpleSign;
+function displayNum(num) {
+    if (screenValue.value == Math.PI || screenValue.value == Math.E || equalCounter==1) {
+        screenValue.value = "";
+    }
+    switch (num) {
         case 'zero':
-            screenValue.value += 0;
+            if (screenValue.value != 0) {
+                screenValue.value += 0;
+            }
+            else
+            {
+                if(screenValue.value=="")
+                {
+                    screenValue.value = 0;
+                }
+            }
             break;
         case 'one':
             screenValue.value += 1;
@@ -33,200 +59,333 @@ function displayNum(num)
         case 'nine':
             screenValue.value += 9;
             break;
-        case 'point':
-            screenValue.value += '.';
+        case 'pi':
+            screenValue.value = Math.PI;
             break;
-        case 'devide':
-            screenValue.value += '/';
-            break; 
-        case 'multiply':
-            screenValue.value += '*';
-            break; 
-        case 'add':
-            screenValue.value += '+';
-            break; 
-        case 'subtract':
-            screenValue.value += '-';
+        case 'e':
+            screenValue.value += Math.E;
             break;
+    }
+    bodmasCounter = 1;
+    lcount = 1;
+    if(signcounter == 0)
+    {
+        pointcounter = 1;
+    }
+    equalCounter = 0;
+    signcounter = 1;
+    plusmincount += 1;
+}
+function pointOperation() {
+    if (screenValue.value == "") {
+        screenValue.value += '0.';
+    }
+    else {
+        if (screenValue.value != "" && pointcounter == 1) {
+            if (signcounter == 0) {
+                screenValue.value += '0.';
+            }
+            else {
+                screenValue.value += '.';
+            }
+        }
+    }
+    pointcounter = 0;
+}
+function piOperation() {
+    screenValue.value = Math.PI;
+    signcounter = 1;
+}
+function bodmas(id) {
+    switch (id) {
         case 'openbracket':
-            screenValue.value += '(';
+            if (bodmasCounter == 1) {
+                screenValue.value += '*';
+                bracatcounter -= 1;
+            }
+            else {
+                screenValue.value += '(';
+            }
+            bracatcounter += 1;
+            bodmasCounter = 0;
             break;
         case 'closebracket':
-            screenValue.value += ')';
-            break; 
-        case 'pi':
-            screenValue.value += Math.PI;
-            break;  
-        case 'e':
-            screenValue.value += '2.7182';
-            break; 
-        case 'mod':
-            screenValue.value += '%';
-            break;      
+            console.log(bracatcounter);
+            if (bracatcounter != 0) {
+                if (lcount == 0) {
+                    screenValue.value += '0)';
+                }
+                else {
+                    screenValue.value += ')';
+                }
+                bracatcounter -= 1;
+                lcount++;
+                if (bracatcounter == 0) {
+                    lcount = 0;
+                }
+            }
+            break;
     }
 }
+function arithmetic(num) {
+    if (signcounter == 1) {
+        switch (num) {
+            case 'devide':
+                screenValue.value += '/';
+                simpleSign = '/';
+                break;
+            case 'multiply':
+                screenValue.value += '*';
+                simpleSign = '*';
+                break;
+            case 'add':
+                screenValue.value += '+';
+                simpleSign = '+';
+                break;
+            case 'subtract':
+                screenValue.value += '-';
+                simpleSign = '-';
+                break;
+            case 'mod':
+                screenValue.value += '%';
+                simpleSign = '%';
+                break;
+            case 'xPowY':
+                screenValue.value += '^';
+                simpleSign = '^';
+                break;
+        }
+    }
+    signcounter = 0;
+    pointcounter = 1;
+}
 //Arithmetic operation
-function operation(oper){
-    switch(oper){
+function operation(oper) {
+    switch (oper) {
         case 'backSpace': //backspace
             const num = screenValue.value.slice(0, -1);
             screenValue.value = num;
             break;
         case 'clear': //clear
-            document.querySelector("#clear").addEventListener("click", ()=>{
-                screenValue.value = " "; 
+            document.querySelector("#clear").addEventListener("click", () => {
+                screenValue.value = "";
             })
+            bodmasCounter=0;
             break;
         case 'equal': //equal
-            if(screenValue.value == " "){
+            if (screenValue.value == " ") {
                 screenValue.value = eval(calsi.display.value);
             }
-            else{
+            else if (screenValue.value.includes("^")) {
+                xPowY();
+            }
+            else {
                 screenValue.value = eval(calsi.display.value);
             }
+            equalCounter = 1;
             break;
         case 'log': //log
-            if(screenValue.value == " ")
-            {
-                screenValue.value = 'log()';
+            if (screenValue.value == 0) {
+                screenValue.value = "invalid input!"
             }
-            else{
+            if (screenValue.value < 0) {
+                screenValue.value = "invalid input!"
+            }
+            if (screenValue.value > 0) {
+                screenValue.value = Math.log10(screenValue.value);
+            }
+            break;
+        case 'ln': //log
+            if (screenValue.value == 0) {
+                screenValue.value = "invalid input!"
+            }
+            if (screenValue.value < 0) {
+                screenValue.value = "invalid input!"
+            }
+            if (screenValue.value > 0) {
                 screenValue.value = Math.log(screenValue.value);
             }
             break;
         case 'tenPowerX': //10^x
-            if(screenValue.value == " ")
-            {
-                screenValue.value = 'x';
-            }
-            else{
-                screenValue.value = Math.pow(10,screenValue.value);
-            }
+            screenValue.value = Math.pow(10, screenValue.value);
             break;
         case 'squareRoot': //square root
-            if(screenValue.value == " ")
-            {
-                screenValue.value = 'sqrt()';
-            }
-            else{
-                screenValue.value = Math.sqrt(screenValue.value);
-            }
+            screenValue.value = Math.sqrt(screenValue.value);
             break;
         case 'square': //find square
-            if(screenValue.value == " ")
-            {
-                screenValue.value = 'pow()';
-            }
-            else{
-                screenValue.value = Math.pow(screenValue.value,2);
-            }
+            screenValue.value = Math.pow(screenValue.value, 2);
             break;
         case 'oneByX': //find 1/x
-            if(screenValue.value == " ")
-            {
-                screenValue.value = '1/x';
-            }
-            else{
-                screenValue.value = 1 / screenValue.value;
-            }
+            screenValue.value = 1 / screenValue.value;
             break;
         case 'abs': //find |x|
-            if(screenValue.value == " ")
-            {
-                screenValue.value = 'abs()';
-            }
-            else{
-                screenValue.value = Math.abs(screenValue.value);
-            }
+            screenValue.value = Math.abs(screenValue.value);
             break;
         case 'exp': //find exp
-            if(screenValue.value == " ")
-            {
-                screenValue.value = 'exp()';
+            screenValue.value = Math.exp(screenValue.value);
+            break;
+        case 'FE': //find F-E
+            if (screenValue.value == " ") {
+                screenValue.value = '0.e+0';
             }
-            else{
-                screenValue.value = Math.exp(screenValue.value);
+            else {
+                screenValue.value = screenValue.value + ".e+0";
             }
             break;
+    }
+}
+function plusMin(id) {
+    if (id == 'plus-min' && screenValue.value != 0) {
+        if (plusmincount == 1) {
+            screenValue.value = "-" + screenValue.value;
+            signcounter = 1;
+        }
+        else {
+            let a = screenValue.value[screenValue.value.length - 1];
+            if (a.match(/[0-9]/)) {
+                let b = screenValue.value.split(simpleSign);
+                screenValue.value = b[0] + simpleSign + "(-" + b[1] + ")";
+            }
+        }
+
+
+    }
+    else {
+        if (id == 'plus-min') {
+            signcounter = 1;
+        }
+        else {
+            signcounter = 0;
+        }
     }
 }
 //factorial find
-function factorial(){
+function factorial() {
     let fact = 1;
-    for(let i = 1; i <= screenValue.value; i++){
-      fact *= i;
+    for (let i = 1; i <= screenValue.value; i++) {
+        fact *= i;
     }
     screenValue.value = fact;
 }
-//
-function trigonometry(num){
-    switch(num){
+//X power Y
+function xPowY() {
+    if (signcounter == 1) {
+        let a = screenValue.value[screenValue.value.length - 1];
+        if (a.match(/[0-9]/)) {
+            let b = screenValue.value.split("^");
+            screenValue.value = Math.pow(b[0], b[1]);
+        }
+    }
+    signcounter = 0;
+
+}
+//Trigonometry function
+function trigonometry(num) {
+    let n;
+    var mathPI = Math.PI / 180;
+    switch (num) {
         case 'sin':
-            if(screenValue.value == " ")
-            {
-                screenValue.value = 'sin()';
-            }
-            else{
-                let n = Math.sin(screenValue.value * Math.PI /180)
-                screenValue.value = n;
-            }
+            n = Math.sin(screenValue.value * mathPI)
+            screenValue.value = n;
             break;
         case 'cos':
-            if(screenValue.value == " ")
-            {
-                screenValue.value = 'cos()';
-            }
-            else{
-                let n = Math.cos(screenValue.value * Math.PI /180)
-                screenValue.value = n;
-            }
+            n = Math.cos(screenValue.value * mathPI)
+            screenValue.value = n;
             break;
         case 'tan':
-            if(screenValue.value == " ")
-            {
-                screenValue.value = 'tan()';
-            }
-            else{
-                let n = Math.tan(screenValue.value * Math.PI /180)
-                screenValue.value = n;
-            }
+            n = Math.tan(screenValue.value * mathPI)
+            screenValue.value = n;
             break;
-        case 'sec':
-            if(screenValue.value == " ")
-            {
-                screenValue.value = 'sec()';
-            }
-            else{
-                let n = Math.acos(screenValue.value * Math.PI /180)
-                screenValue.value = n;
-            }
+        case 'sinh':
+            n = Math.sinh(screenValue.value * mathPI)
+            screenValue.value = n;
             break;
-        case 'csc':
-            if(screenValue.value == " ")
-            {
-                screenValue.value = 'csc()';
-            }
-            else{
-                let n = Math.cosh(screenValue.value * Math.PI /180)
-                screenValue.value = n;
-            }
+        case 'cosh':
+            n = Math.cosh(screenValue.value * mathPI)
+            screenValue.value = n;
             break;
-        case 'cot':
-            if(screenValue.value == " ")
-            {
-                screenValue.value = 'cot()';
-            }
-            else{
-                let n = Math.atanh(screenValue.value * Math.PI /180)
-                screenValue.value = n;
-            }
+        case 'tanh':
+            n = Math.tanh(screenValue.value * mathPI)
+            screenValue.value = n;
             break;
     }
 }
-
-
-
-
+//function 
+function fun(num) {
+    switch (num) {
+        case 'abslute':
+            screenValue.value = Math.abs(screenValue.value);
+            break;
+        case 'squrX':
+            screenValue.value = '(' + screenValue.value + ')';
+            break;
+        case 'dolor':
+            screenValue.value = screenValue.value * 81.60 + " Rs";
+            break;
+    }
+}
+//memory function
+function memoryOperation(str) {
+    switch (str) {
+        case 'mc':
+            screenValue.value = localStorage.clear();
+            break;
+        case 'mAdd':
+            handleMPlus();
+            break;
+        case 'mSubtract':
+            handleMSubtract();
+            break;
+        case 'mr':
+            mrHandle();
+            break;
+        case 'ms':
+            localStorage.setItem("memoryValue", JSON.stringify(memoryArray));
+            break;
+    }
+}
+//handle M+
+function handleMPlus() {
+    sign = "Plus";
+    let result = screenValue.value;
+    memoryArray.push(result);
+}
+//handle M-
+function handleMSubtract() {
+    sign = "Minus";
+    let result = screenValue.value;
+    memoryArray.push(result);
+}
+//handle MR
+function mrHandle() {
+    let ans = Number.parseInt(memoryArray[0]);
+    for (let i = 1; i < memoryArray.length; i++) {
+        let arrayValue = Number.parseInt(memoryArray[i]);
+        if (sign == "Plus") {
+            ans = ans + arrayValue;
+        }
+        if (sign == "Minus") {
+            ans = ans - arrayValue;
+        }
+    }
+    screenValue.value = ans;
+}
+//Tow Power nd function
+function twoPowerND() {
+    if (btnVal == 0) {
+        document.getElementById("square").value = "x'";
+        document.getElementById("squareRoot").value = "&";
+        document.getElementById("openbracket").value = "⇒";
+        document.getElementById("closebracket").value = "∑";
+        btnVal++;
+    }
+    else {
+        document.getElementById("square").value = "x²";
+        document.getElementById("squareRoot").value = "2√x";
+        document.getElementById("openbracket").value = "(";
+        document.getElementById("closebracket").value = ")";
+    }
+}
 
 
 
