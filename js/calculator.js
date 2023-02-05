@@ -283,29 +283,30 @@ function xPowY() {
 function trigonometry(num) {
     let n;
     var mathPI = Math.PI / 180;
+    var result = screenValue.value * mathPI;
     switch (num) {
         case 'sin':
-            n = Math.sin(screenValue.value * mathPI)
+            n = Math.sin(result)
             screenValue.value = n;
             break;
         case 'cos':
-            n = Math.cos(screenValue.value * mathPI)
+            n = Math.cos(result)
             screenValue.value = n;
             break;
         case 'tan':
-            n = Math.tan(screenValue.value * mathPI)
+            n = Math.tan(result)
             screenValue.value = n;
             break;
         case 'sinh':
-            n = Math.sinh(screenValue.value * mathPI)
+            n = Math.sinh(result)
             screenValue.value = n;
             break;
         case 'cosh':
-            n = Math.cosh(screenValue.value * mathPI)
+            n = Math.cosh(result)
             screenValue.value = n;
             break;
         case 'tanh':
-            n = Math.tanh(screenValue.value * mathPI)
+            n = Math.tanh(result)
             screenValue.value = n;
             break;
     }
@@ -331,10 +332,10 @@ function memoryOperation(str) {
             screenValue.value = localStorage.clear();
             break;
         case 'mAdd':
-            handleMPlus();
+            handleMemory('Plus');
             break;
         case 'mSubtract':
-            handleMSubtract();
+            handleMemory('Minus');
             break;
         case 'mr':
             mrHandle();
@@ -345,16 +346,21 @@ function memoryOperation(str) {
     }
 }
 //handle M+
-function handleMPlus() {
-    sign = "Plus";
-    let result = screenValue.value;
-    memoryArray.push(result);
-}
-//handle M-
-function handleMSubtract() {
-    sign = "Minus";
-    let result = screenValue.value;
-    memoryArray.push(result);
+function handleMemory(id)
+{
+    let result;
+    switch(id){
+        case 'Plus':
+            sign = "Plus";
+            result = screenValue.value;
+            memoryArray.push(result);
+            break;
+        case 'Minus':
+            sign = "Minus";
+            result = screenValue.value;
+            memoryArray.push(result);
+            break;
+    }
 }
 //handle MR
 function mrHandle() {
